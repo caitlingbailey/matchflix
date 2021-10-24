@@ -19,14 +19,13 @@ const VoteButton = styled.button`
   -webkit-appearance: none;
   -moz-appearance: none;
   background: #80c904;
-  :hover,
-  :focus {
-    /* background: #0053ba; */
+  :hover {
+    background: #5d9302;
   }
-  :focus {
+  /* :focus {
     outline: 1px solid #fff;
     outline-offset: -4px;
-  }
+  } */
   :active {
     transform: scale(0.99);
   }
@@ -34,6 +33,9 @@ const VoteButton = styled.button`
 
 const VoteButtonNo = styled(VoteButton)`
   background: #ff6666;
+  :hover {
+    background: #c75151;
+  }
 `;
 
 const ThumbsUp = <FontAwesomeIcon icon={faThumbsUp} />;

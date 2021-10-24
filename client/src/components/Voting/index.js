@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import VotingButtons from "../Button";
-import Display from "../Display";
-import { getGenres } from "../Display/utils";
+import { getGenres, findMovies } from "../../utils";
+import postData from "../../utils/postData";
 
 function Voting() {
   const [genres, setGenres] = useState([]);
   const [index, setIndex] = React.useState(0);
   const [currentGenre, setCurrentGenre] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [APIResponse, setAPIResponse] = useState("");
 
   useEffect(() => {
     const getGenresList = async () => {
@@ -25,12 +26,23 @@ function Voting() {
     setCurrentGenre(genres[0]);
   }, [genres])
 
+  useEffect(() => {
+    const callAPI = () => {
+        fetch("http://localhost:9000/testAPI")
+            .then(res => res.text())
+            .then(res => setAPIResponse({ apiResponse: res }));
+    }
+    callAPI();
+  }, [])
+
   const nextGenre = () => {
     if (index < genres.length) {
         setCurrentGenre(genres[index + 1]);
         setIndex(index + 1);
     } else {
         console.log(`Output: `, selectedGenres);
+        const films = findMovies(selectedGenres);
+        console.log(films);
     }
   };
 
@@ -42,6 +54,10 @@ function Voting() {
     nextGenre();
   };
 
+  const submitData = () => {
+    postData("http://localhost:9000/api/addgenres", JSON.stringify(selectedGenres));
+  }
+
   return (
     <>
       {genres.length && <h2>{currentGenre}</h2>}
@@ -50,6 +66,7 @@ function Voting() {
         voteNo={nextGenre}
         genre={currentGenre}
       />
+      <button onClick={submitData}>Submit</button>
     </>
   );
 }

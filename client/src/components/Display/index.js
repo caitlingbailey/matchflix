@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getGenres } from "./utils";
+import { getGenres } from "../../utils";
 
 const Display = () => {
   const [instructions, setInstructions] = useState(false);
@@ -27,7 +27,6 @@ const Display = () => {
           if (index < 3) {
             // setIndex((i) => (i + 1) % instructionsMessage.length) // <-- increment index
             setIndex((i) => (i + 1)) // <-- increment index
-            console.log(index)
           } else {
             setIndex(3);
           }
