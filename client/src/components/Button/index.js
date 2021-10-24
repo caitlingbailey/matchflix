@@ -39,13 +39,25 @@ const VoteButtonNo = styled(VoteButton)`
 const ThumbsUp = <FontAwesomeIcon icon={faThumbsUp} />;
 const ThumbsDown = <FontAwesomeIcon icon={faThumbsDown} />;
 
-export function Voting() {
+export function VotingButtons({voteYes, voteNo, genre}) {
   return (
     <div>
-      <VoteButton>{ThumbsUp}</VoteButton>
-      <VoteButtonNo>{ThumbsDown}</VoteButtonNo>
+      <VoteButton
+        onClick={() => {
+          voteYes(genre);
+        }}
+        >
+        {ThumbsUp}
+      </VoteButton>
+      <VoteButtonNo
+        onClick={() => {
+          voteNo();
+        }}
+      >
+        {ThumbsDown}
+      </VoteButtonNo>
     </div>
   );
 }
 
-export default Voting;
+export default VotingButtons;

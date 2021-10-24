@@ -1,5 +1,5 @@
 import './App.css';
-import Voting from './components/Button';
+import Voting from "./components/Voting";
 import Display from './components/Display';
 import logo from "./assets/images/matchflix-logo.png";
 
