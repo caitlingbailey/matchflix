@@ -17,4 +17,18 @@ router.post("/addgenres", (req, res) => {
       });
   });
 
+  router.get('/matches', (req, res, next) => {
+    // post placeholder
+    if (req.body.action) {
+      console.log(`Matches Endpoint in TestAPI`);
+        Match.create(req.body)
+        .then((data) => res.json(data))
+        .catch(next);
+    } else {
+        res.json({
+            error: 'The input is empty',
+        })
+    }
+  });
+
 module.exports = router;

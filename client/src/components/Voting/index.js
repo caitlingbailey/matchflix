@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VotingButtons from "../Button";
-import { getGenres, findMovies } from "../../utils";
-import postData from "../../utils/postData";
+import { getGenres, findMovies } from "utils";
+import postData from "utils/postData";
 
 function Voting() {
   const [genres, setGenres] = useState([]);
@@ -26,14 +26,14 @@ function Voting() {
     setCurrentGenre(genres[0]);
   }, [genres])
 
-  useEffect(() => {
-    const callAPI = () => {
-        fetch("/matches")
-            .then(res => res.text())
-            .then(res => setAPIResponse({ apiResponse: res }));
-    }
-    callAPI();
-  }, [])
+  // useEffect(() => {
+  //   const callAPI = () => {
+  //       fetch("/matches")
+  //           .then(res => res.text())
+  //           .then(res => setAPIResponse({ apiResponse: res }));
+  //   }
+  //   callAPI();
+  // }, [])
 
   const nextGenre = () => {
     if (index < genres.length) {
@@ -55,7 +55,7 @@ function Voting() {
   };
 
   const submitData = () => {
-    postData("api/addgenres", JSON.stringify(selectedGenres));
+    postData("https://matchflix1.herokuapp.com/addgenres", JSON.stringify(selectedGenres));
   }
 
   return (

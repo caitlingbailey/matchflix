@@ -21,9 +21,10 @@ router.post("/addgenres", (req, res) => {
     });
 });
 
-router.post('/matches', (req, res, next) => {
+router.get('/matches', (req, res, next) => {
   // post placeholder
   if (req.body.action) {
+    console.log(`Matches Endpoint`);
       Match.create(req.body)
       .then((data) => res.json(data))
       .catch(next);
