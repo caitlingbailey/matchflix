@@ -55,7 +55,7 @@ function Voting() {
   };
 
   const submitData = () => {
-    postData("http://localhost:9000/api/addgenres", JSON.stringify(selectedGenres));
+    postData("api/addgenres", JSON.stringify(selectedGenres));
   }
 
   return (

@@ -58,3 +58,10 @@ app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
+
+app.post('/submit', async (req, res) => {
+  const genresList = req.body;
+  console.log(`Submit: `, genresList);
+  res.send({message: 'Genres Submitted'});
+  // await insertAd(newAd);
+});

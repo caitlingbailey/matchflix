@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Matchflix",
+  "name": "Matchflix - find your next binge-worthy movie",
   "icons": [
     {
       "src": "favicon.ico",

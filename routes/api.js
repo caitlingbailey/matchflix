@@ -41,4 +41,12 @@ router.delete('/matches/:id', (req, res, next) => {
   .catch(next);
 });
 
+// router.post('/submit-genres', (req, res, next) => {
+  
+// });
+
+// router.post('/final-genres', (req, rest, next) => {
+
+// });
+
 module.exports = router;
