@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VotingButtons from "../Button";
-import { getGenres, findMovies } from "utils";
-import postData from "utils/postData";
+import { getGenres, findMovies } from "../../utils";
+import postData from "../../utils/postData";
 
 function Voting() {
   const [genres, setGenres] = useState([]);
@@ -55,7 +55,7 @@ function Voting() {
   };
 
   const submitData = () => {
-    postData("https://matchflix1.herokuapp.com/addgenres", JSON.stringify(selectedGenres));
+    postData("/addgenres", JSON.stringify(selectedGenres));
   }
 
   return (
