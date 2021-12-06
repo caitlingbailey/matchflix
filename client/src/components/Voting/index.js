@@ -28,7 +28,7 @@ function Voting() {
 
   useEffect(() => {
     const callAPI = () => {
-        fetch("http://localhost:9000/testAPI")
+        fetch("/matches")
             .then(res => res.text())
             .then(res => setAPIResponse({ apiResponse: res }));
     }
