@@ -15,9 +15,9 @@ const schema = new Schema({
 });
 
 // Create model for todo
-const Match = mongoose.model('Match', schema);
+// const Match = mongoose.model('Match', schema);
 
-module.exports = Match;
+// module.exports = Match;
 
 // Code
 // Status - genres / movies

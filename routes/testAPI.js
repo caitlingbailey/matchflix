@@ -5,7 +5,7 @@ router.get("/", function(req, res, next) {
     res.send("API is working properly");
 });
 
-router.post("/addgenres", (req, res) => {
+router.post("/api/addgenres", (req, res) => {
     let myGenres = new Match(req.body);
     console.log(req.body);
     myGenres.save()
