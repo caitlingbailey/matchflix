@@ -1,18 +1,20 @@
-import './App.css';
-import Voting from "./components/Voting";
-import Display from './components/Display';
-import logo from "./assets/images/matchflix-logo.png";
+import "./App.css";
+import MatchFlix from "./containers/MatchFlix";
+import Welcome from "./containers/Welcome";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="matchflix logo" />
-        <Display />
-        <Voting />
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/matchflix" element={<MatchFlix />} />
+          </Routes>
+        </header>
+      </div>
+    </Router>
   );
 }
 

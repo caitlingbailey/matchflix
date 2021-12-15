@@ -50,11 +50,14 @@ app.use((err, req, res, next) => {
 
 // GET REQUESTS
 // Get Player 1's genres
-app.get("/api/genres/:id", (req, res) => {
-  console.log("Retrieve genres!");
-  Match.findOne({ _id: req.params.id }).then((matches) => {
-    res.json(matches);
-  });
+app.get("/api/genres/:id", async (req, res) => {
+  try {
+    console.log("Retrieve genres!");
+    const response = await Match.findOne({ _id: req.params.id });
+    res.json(response);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Get Player 2's movies

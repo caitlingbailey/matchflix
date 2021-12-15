@@ -47,3 +47,5 @@ export const outputMessage = (moviesList) => {
 export * from "./fetchData";
 export * from "./postData";
 export * from "./putData";
+export * from "./findIntersection";
+export * from "./getStatus";
