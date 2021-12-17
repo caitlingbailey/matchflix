@@ -71,12 +71,25 @@ app.get("api/movies/:id", async (req, res) => {
 });
 
 // POST requests
+// Submit Player 2 genres
+app.post("/api/genres/:id", async (req, res) => {
+  try {
+    console.log(`Submit Player 2's Genres`);
+    const genres = req.body.genres_player2;
+    const filter = { _id: req.params.id };
+    const update = { genres_final: genres };
+    await Match.findOneAndUpdate(filter, update);
+    res.json({ id: req.params.id});
+  } catch (err) {
+    console.log(err);
+  }
+});
 // Submit Player 1 genres
 app.post("/api/genres", async (req, res) => {
   try {
-    const genres = req.body.genres;
+    const genres = req.body.genres_player1;
     console.log(`Genres: `, genres);
-    let response = await Match.create({ genres: genres });
+    let response = await Match.create({ genres_player1: genres });
     let id = response._id;
     console.log(id);
     res.json({ id: id });
@@ -86,18 +99,6 @@ app.post("/api/genres", async (req, res) => {
   }
 });
 
-// Submit Player 2 genres
-app.post("api/genres/:id", async (req, res) => {
-  try {
-    const genres = req.body.genres;
-    const filter = { _id: req.params.id };
-    const update = { genres_final: genres };
-    await Match.findOneAndUpdate(filter, update);
-    res.sendStatus(200);
-  } catch (err) {
-    console.log(err);
-  }
-});
 
 // Submit movie list - final depends on if movies exist or not
 app.post("/api/movies/:id", async (req, res) => {
@@ -107,14 +108,15 @@ app.post("/api/movies/:id", async (req, res) => {
     const filter = { _id: req.params.id };
     const movies = req.body.movies;
     let matches = await Match.findOne(filter);
+    console.log(matches);
     let update;
-    if (matches.movies.length) {
+    if (matches.movies_player2.length) {
       // Final movie submission
       update = { movies_final: movies };
       console.log(movies, filter);
     } else {
       // First movie submission
-      update = { movies: movies };
+      update = { movies_player2: movies };
       console.log(movies, filter);
     }
     await Match.findOneAndUpdate(filter, update);

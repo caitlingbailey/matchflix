@@ -9,22 +9,23 @@ export const getGenres = async () => {
   response["genres"].forEach((genre) => {
     genres[genre["id"]] = genre["name"];
   });
+  console.log(genres);
   return genres;
 };
 
-export const findMovies = async (genres) => {
-  const query2 = `https://api.themoviedb.org/3/trending/movie/day?api_key=${api_key}`;
-  const response = await fetchData(query2);
-  let movieChoices = {};
-  response["results"].forEach((movie) => {
-    let movieGenres = [];
-    movie["genre_ids"].forEach((genre) => {
-      movieGenres.push(genres[genre]);
-    });
-    movieChoices[movie["original_title"]] = movieGenres;
-  });
-  return movieChoices;
-};
+// export const findMovies = async (genres) => {
+//   const query2 = `https://api.themoviedb.org/3/trending/movie/day?api_key=${api_key}`;
+//   const response = await fetchData(query2);
+//   let movieChoices = {};
+//   response["results"].forEach((movie) => {
+//     let movieGenres = [];
+//     movie["genre_ids"].forEach((genre) => {
+//       movieGenres.push(genres[genre]);
+//     });
+//     movieChoices[movie["original_title"]] = movieGenres;
+//   });
+//   return movieChoices;
+// };
 
 export const likedMovies = (genres, movieChoices) => {
   let moviesList = [];
