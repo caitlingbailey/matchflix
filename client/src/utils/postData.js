@@ -1,5 +1,9 @@
 const postData = async (url, payload) => {
-  let res = await fetch(url, {
+  let baseUrl = "";
+  if (window.location.hostname === "localhost") {
+    baseUrl = "http://localhost:5000";
+  }
+  let res = await fetch(baseUrl + url, {
     method: "POST",
     headers: {
     //   Authorization: "Bearer " + cognitoUser.signInUserSession.idToken.jwtToken,
