@@ -30,7 +30,7 @@ function Voting() {
   useEffect(() => {
     async function getResponseStatus() {
       let response = await fetchData(
-        `http://localhost:5000/api/genres/${query.get("code")}`
+        `/api/genres/${query.get("code")}`
       );
       setMatches(response);
     }
@@ -108,7 +108,7 @@ function Voting() {
     try {
       if (status.stage === "genres" && status.player === "player1") {
         const response = await postData(
-          `http://localhost:5000/api/genres`,
+          `/api/genres`,
           JSON.stringify({
             genres_player1: selectedGenres,
           })
@@ -120,7 +120,7 @@ function Voting() {
       } else if (status.stage === "genres" && status.player === "player2") {
         console.log("Player 2 Genres Submit");
         await postData(
-          `http://localhost:5000/api/genres/${id}`,
+          `/api/genres/${id}`,
           JSON.stringify({
             genres_player2: selectedGenres,
           })
@@ -139,7 +139,7 @@ function Voting() {
         console.log("P1 submit movies");
         // Find final movies, submit to DB
         await postData(
-          `http://localhost:5000/api/movies/${id}`,
+          `/api/movies/${id}`,
           JSON.stringify({
             movies_player2: selectedGenres,
           })
@@ -154,7 +154,7 @@ function Voting() {
         console.log("Player 1 Submit Movies");
         // Keep selection and submit to DB
         await postData(
-          `http://localhost:5000/api/movies/${id}`,
+          `/api/movies/${id}`,
           JSON.stringify({
             movies_final: selectedGenres,
           })
