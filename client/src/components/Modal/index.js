@@ -38,6 +38,10 @@ const ModalContent = styled.div`
     height: 450px;
     font-size: 1em;
   }
+  @media (min-width: 992px) {
+    width: 50%;
+    max-width: 600px;
+  }
 `;
 
 const ModalHeader = styled.div`

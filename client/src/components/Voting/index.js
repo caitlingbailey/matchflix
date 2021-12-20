@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { VotingButtons, SubmitButton } from "../Button";
+import { Link } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
 import useQuery from "../../hooks/useQuery";
 import postData from "../../utils/postData";
@@ -7,9 +8,11 @@ import fetchData from "../../utils/fetchData";
 import getMatchStatus from "../../utils/getStatus";
 import findMovies from "../../utils/findMovies";
 import { allGenres } from "../../data";
+import { LinkText } from "../../components/Typography";
 
 function Voting() {
   const [status, setStatus] = useState({ stage: "genres", player: "player1" });
+  const [submitted, setSubmitted] = useState(false);
   const [matches, setMatches] = useState({});
   const [genres, setGenres] = useState([]);
   const [index, setIndex] = useState(0);
@@ -102,10 +105,10 @@ function Voting() {
             genres_player1: selectedGenres,
           })
         );
-        console.log(`Response: `, response.id);
         setId(response.id);
         console.log(`id :`, id);
         setStatus({ ...status, player: "player2" });
+        setSubmitted(true);
       } else if (status.stage === "genres" && status.player === "player2") {
         console.log("Player 2 Genres Submit");
         await postData(
@@ -137,7 +140,7 @@ function Voting() {
         setSelectedGenres([]);
         setIndex(0);
         setGenres([]);
-
+        setSubmitted(true);
         // setGenres(movies)
       } else if (status.stage === "movies" && status.player === "player1") {
         console.log("Player 1 Submit Movies");
@@ -159,14 +162,18 @@ function Voting() {
     }
   };
 
+  const handleContinue = async () => {
+    setSubmitted(false);
+  };
+
   console.log(status);
   console.log(matches);
 
   return (
     <>
-      {genres?.length && <h2>{currentGenre}</h2>}
       {status.stage !== "complete" && (
         <>
+          {genres?.length && <h2>{currentGenre}</h2>}
           <VotingButtons
             voteYes={voteYes}
             voteNo={nextGenre}
@@ -176,6 +183,13 @@ function Voting() {
         </>
       )}
       {id && <div>Your code: {id}</div>}
+      {submitted && (
+        <Link to={`?code=${id}`}>
+          <LinkText onClick={handleContinue()}>
+            Ready to continue?
+          </LinkText>
+        </Link>
+      )}
       {status.stage === "complete" && (
         <>
           <p>You should watch: </p>
