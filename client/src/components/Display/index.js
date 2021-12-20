@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { getGenres } from "../../utils";
 
 const Display = () => {
   const [instructions, setInstructions] = useState(false);

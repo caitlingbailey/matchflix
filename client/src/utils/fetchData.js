@@ -1,6 +1,9 @@
 const fetchData = async (url) => {
   let baseUrl = "";
-  if (window.location.hostname === "localhost") {
+  if (
+    window.location.hostname === "localhost" &&
+    url.indexOf("themoviedb") === -1
+  ) {
     baseUrl = "http://localhost:5000";
   }
   let res = await fetch(baseUrl + url, {

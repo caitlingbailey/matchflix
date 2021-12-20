@@ -104,11 +104,11 @@ app.post("/api/genres", async (req, res) => {
 app.post("/api/movies/:id", async (req, res) => {
   // Find one and update
   try {
-    console.log(`Submit movies`);
+    console.log(`Submit Movies`);
     const filter = { _id: req.params.id };
     const movies = req.body.movies;
     let matches = await Match.findOne(filter);
-    console.log(matches);
+    console.log(`Matches: `, matches);
     let update;
     if (matches.movies_player2.length) {
       // Final movie submission

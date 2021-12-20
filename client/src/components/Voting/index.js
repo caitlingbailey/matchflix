@@ -1,12 +1,12 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { VotingButtons, SubmitButton } from "../Button";
-import { getGenres } from "../../utils";
 import isEmpty from "lodash/isEmpty";
 import useQuery from "../../hooks/useQuery";
 import postData from "../../utils/postData";
 import fetchData from "../../utils/fetchData";
 import getMatchStatus from "../../utils/getStatus";
 import findMovies from "../../utils/findMovies";
+import { allGenres } from "../../data";
 
 function Voting() {
   const [status, setStatus] = useState({ stage: "genres", player: "player1" });
@@ -29,9 +29,7 @@ function Voting() {
 
   useEffect(() => {
     async function getResponseStatus() {
-      let response = await fetchData(
-        `/api/genres/${query.get("code")}`
-      );
+      let response = await fetchData(`/api/genres/${query.get("code")}`);
       setMatches(response);
     }
     getResponseStatus();
@@ -44,16 +42,8 @@ function Voting() {
   }, [matches]);
 
   useEffect(() => {
-    const getGenresList = async () => {
-      const genresList = await getGenres();
-      let genresList2 = [];
-      Object.entries(genresList).forEach(([key, value]) => {
-        genresList2.push(value);
-      });
-      setGenres(genresList2);
-    };
     if (status.stage === "genres" && status.player === "player1") {
-      getGenresList();
+      setGenres(allGenres);
     }
   }, [status.player, status.stage]);
 
@@ -68,24 +58,23 @@ function Voting() {
     if (status.stage === "genres" && status.player === "player2") {
       console.log("Player 2's Turn");
       setGenres(matches.genres_player1);
-      // const response = fetchData(`http://localhost:5000/api/genres/${id}`);
-      // setGenres(response.genres_player1);
     } else if (status.stage === "movies" && status.player === "player2") {
       // PLayer 2- now choose movies
       console.log("Time for P2 to decide on movies");
       // let movieChoices = await findMovies(selectedGenres);
-      // setGenres(movieChoices);
-      // Handle submit of genres - find final intersection, submit to DB, and return; then call movies DB; then set page stage
-      // Call movies DB with the final_genres array
-      // setGenres(movies)
     } else if (status.stage === "movies" && status.player === "player1") {
       console.log("Player 1 again - choose your movies");
       setGenres(matches.movies_player2);
       // Fetch movies_player2
-      // setGenres(movies)
       // handleSubmit() should keep selection, check intersection and submit that. Return final movies list. Set status to done
     }
-  }, [id, status.player, status.stage, matches.genres_player1, matches.movies_player2]);
+  }, [
+    id,
+    status.player,
+    status.stage,
+    matches.genres_player1,
+    matches.movies_player2,
+  ]);
 
   const nextGenre = () => {
     if (index < genres.length) {
@@ -141,7 +130,7 @@ function Voting() {
         await postData(
           `/api/movies/${id}`,
           JSON.stringify({
-            movies_player2: selectedGenres,
+            movies: selectedGenres,
           })
         );
         setStatus({ ...status, player: "player1" });
@@ -156,7 +145,7 @@ function Voting() {
         await postData(
           `/api/movies/${id}`,
           JSON.stringify({
-            movies_final: selectedGenres,
+            movies: selectedGenres,
           })
         );
         // Set status to done
