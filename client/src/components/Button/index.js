@@ -94,9 +94,8 @@ export const SubmitButton = styled.button`
 
 export const WelcomeButton = styled.button`
   width: 300px;
-  height:100px; */
-  border-radius: 5px;
-  margin-top: 1rem;
+  height:60px; */
+  /* margin-top: 1rem; */
   /* background-color: grey; */
   font: black;
   background-color: #f5f5f5;
@@ -105,7 +104,8 @@ export const WelcomeButton = styled.button`
   color: #333333;
   cursor: pointer;
   display: inline-block;
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Bebas Neue', cursive;
+  /* font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif; */
   font-size: 30px;
   font-weight: 500;
   line-height: 20px;
@@ -119,6 +119,9 @@ export const WelcomeButton = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  :hover {
+    color: red;
+  }
 `
 
 export default VotingButtons;
