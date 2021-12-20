@@ -43,7 +43,7 @@ const Display = () => {
   return (
     <div>
       <div id="display">{displayText}</div>
-      <div id="instructions">{instructions}</div>
+      {/* <div id="instructions">{instructions}</div> */}
     </div>
   );
 };

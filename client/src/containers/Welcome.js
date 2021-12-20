@@ -6,6 +6,7 @@ import Display from "../components/Display";
 import logo from "../assets/images/matchflix-logo.png";
 import movieIcon from "../assets/images/movie-icon.png";
 import { WelcomeButton } from "../components/Button";
+import Modal from "../components/Modal";
 
 const WelcomeContainer = styled.div`
   height: 456px;
@@ -30,6 +31,18 @@ const MovieIcon = styled.img`
   width: 100px;
   height: auto;
 `;
+
+const Linktext = styled.p`
+  color: red;
+  text-decoration: underline;
+  margin: 0;
+  margin-top: 0.5em;
+  font-size: 0.7em;
+  cursor: pointer;
+  :hover {
+    color: #a90000;
+  }
+`
 
 const CodeInputWrapper = styled.div`
   max-width: 100%;
@@ -93,6 +106,7 @@ const CodeSubmit = styled.input`
 function MatchFlix() {
   const [displayInput, setDisplayInput] = useState(false);
   const [ID, setID] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   function handleChange(event) {
     setID(event.target.value);
@@ -111,6 +125,8 @@ function MatchFlix() {
         <img src={logo} alt="matchflix logo" />
       </HeaderImageContainer>
       <Display />
+      <Linktext onClick={() => setShowModal(true)}>How Does It Work?</Linktext>
+      <Modal show={showModal} onClose={() => setShowModal(false)} />
       <WelcomeButtonContainer>
         <Link to="matchflix">
           <WelcomeButton>Let's go</WelcomeButton>
