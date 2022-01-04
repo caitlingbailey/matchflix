@@ -166,9 +166,6 @@ function Voting() {
     setSubmitted(false);
   };
 
-  console.log(status);
-  console.log(matches);
-
   return (
     <>
       {status.stage !== "complete" && (
