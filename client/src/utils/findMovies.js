@@ -3,8 +3,6 @@ import filter from 'lodash/filter';
 import includes from 'lodash/includes';
 import { allGenresAndIds } from "../data";
 
-// const api_key = "04b2253f2a386ad7e8fcc3104c69531e";
-
 async function findMovies(selectedGenres) {
     let genresQuery;
     let genresList = [];
@@ -18,7 +16,7 @@ async function findMovies(selectedGenres) {
         genresQuery = genresQuery.replace(",", "%2C");
     }
             
-    const query = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genresQuery}&with_watch_monetization_types=flatrate`;
+    const query = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genresQuery}&with_watch_monetization_types=flatrate`;
     let response = await fetchData(query);
     let movieChoices = [];
     response?.results.forEach((result) => {
